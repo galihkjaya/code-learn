@@ -13,6 +13,8 @@ export default {
         sans: ['"Instrument Sans"', 'sans-serif'],
         serif: ['"Playfair Display"', 'serif'],
         mono: ['"DM Mono"', 'monospace'],
+        playfair: ['"Playfair Display"', 'serif'],
+        'mono-dm': ['"DM Mono"', 'monospace'],
       },
       transitionTimingFunction: {
         DEFAULT: 'cubic-bezier(0.23, 1, 0.32, 1)',

@@ -54,6 +54,30 @@
 }
 
 @layer components {
+  /* Primary button: ink bg, paper text, hover accent — no border-radius */
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    background-color: var(--ink);
+    color: var(--paper);
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  .btn-primary:hover:not(:disabled) {
+    background-color: var(--accent);
+  }
+
+  .btn-primary:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
   .handbook-content {
     color: #F2F0ED;
     font-size: 0.95rem;

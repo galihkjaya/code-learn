@@ -56,33 +56,33 @@ export function HandbookViewer({ slug }: HandbookViewerProps) {
   }, [normalizedSlug])
 
   return (
-    <article className="grid h-full min-h-[420px] overflow-hidden rounded-lg border border-slate-200 bg-white shadow-panel">
-      <header className="flex items-center justify-between gap-3 border-b border-slate-200 px-4 py-3">
+    <article className="flex h-full min-h-[420px] flex-col overflow-hidden bg-ink text-paper">
+      <header className="flex items-center justify-between gap-3 border-b border-white/10 px-4 py-3">
         <div className="flex items-center gap-2">
-          <BookOpen className="h-5 w-5 text-teal-700" aria-hidden="true" />
-          <h2 className="text-sm font-semibold text-slate-950">Handbook</h2>
+          <BookOpen className="h-4 w-4 text-paper/50" aria-hidden="true" />
+          <span className="font-mono-dm text-xs uppercase tracking-widest text-paper/70">Handbook</span>
         </div>
         {normalizedSlug ? (
-          <span className="truncate text-xs font-medium text-slate-500">{normalizedSlug}</span>
+          <span className="truncate font-mono-dm text-xs text-paper/40">{normalizedSlug}</span>
         ) : null}
       </header>
 
-      <div className="min-h-0 overflow-auto p-4">
+      <div className="min-h-0 flex-1 overflow-auto p-6">
         {state.status === 'loading' || state.status === 'idle' ? (
-          <div className="flex h-64 items-center justify-center text-sm font-semibold text-slate-600">
-            <Loader2 className="mr-2 h-4 w-4 animate-spin text-teal-700" aria-hidden="true" />
-            Loading handbook
+          <div className="flex h-64 items-center justify-center gap-2 font-mono-dm text-sm text-paper/40">
+            <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" />
+            Loading reference…
           </div>
         ) : null}
 
         {state.status === 'missing' ? (
-          <div className="rounded-lg border border-amber-200 bg-amber-50 p-4 text-sm font-semibold text-amber-800">
-            Handbook page coming soon
+          <div className="font-mono-dm text-sm text-paper/40">
+            Handbook page coming soon.
           </div>
         ) : null}
 
         {state.status === 'error' ? (
-          <div className="rounded-lg border border-rose-200 bg-rose-50 p-4 text-sm font-semibold text-rose-700">
+          <div className="font-mono-dm text-sm text-accent">
             {state.message}
           </div>
         ) : null}
@@ -98,3 +98,4 @@ export function HandbookViewer({ slug }: HandbookViewerProps) {
 function normalizeSlug(slug?: string): string {
   return slug?.replace(/^\/+/, '').replace(/\.\.+/g, '').trim() ?? ''
 }
+
