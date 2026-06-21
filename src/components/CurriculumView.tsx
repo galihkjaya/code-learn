@@ -49,6 +49,16 @@ export function CurriculumView() {
           />
         ))}
       </div>
+
+      <div className="mt-16 flex justify-center px-4">
+        <Link
+          to="/brief"
+          className="group inline-flex items-center gap-3 border border-ink px-8 py-4 font-mono-dm text-sm uppercase tracking-widest transition-all duration-300 hover:bg-ink hover:text-paper"
+        >
+          <span>Re-generate Curriculum</span>
+          <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+        </Link>
+      </div>
     </section>
   )
 }
