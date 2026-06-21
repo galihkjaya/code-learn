@@ -8,6 +8,7 @@ import { Learn } from './pages/Learn'
 import { Handbook } from './pages/Handbook'
 import { Splash } from './pages/Splash'
 import { PageTransition } from './components/PageTransition'
+import logoUrl from './lib/logo.png'
 import './index.css'
 
 function MainLayout() {
@@ -16,14 +17,14 @@ function MainLayout() {
       <nav className="border-b border-ink-light/20 bg-ink text-paper">
         <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-2 px-4 py-3 sm:px-6 lg:px-8">
           <div className="flex items-center gap-4">
-            <img src="/src/lib/logo.png" alt="Logo" className="h-6 w-6 object-contain invert" />
+            <img src={logoUrl} alt="Logo" className="h-6 w-6 object-contain invert" />
             <span className="font-playfair text-xl font-bold tracking-widest text-paper">PYGRIND</span>
             <span className="hidden font-mono-dm text-xs text-ink-light sm:inline-block">| train like an engineer</span>
           </div>
           <div className="flex items-center gap-1">
             <NavItem label="Learn" to="/learn" />
             <NavItem label="Handbook" to="/handbook" />
-            <NavItem label="Practice" to="/practice" />
+            <NavItem label="Practice" to="/learn" />
           </div>
         </div>
       </nav>
@@ -44,7 +45,10 @@ function MainLayout() {
 
 function App() {
   return (
-    <BrowserRouter basename={normalizeBaseName(import.meta.env.BASE_URL)}>
+    <BrowserRouter 
+      basename={normalizeBaseName(import.meta.env.BASE_URL)}
+      future={{ v7_startTransition: true, v7_relativeSplatPath: true }}
+    >
       <Routes>
         {/* We will route / to Splash, and Setup / Brief next. */}
         <Route element={<Splash />} path="/" />

@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>How to Get a Groq API Key — PyGrind</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Instrument+Sans:wght@400;500;600&family=Playfair+Display:wght@400;700;900&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --paper: #F2F0ED;
+      --ink: #1A1A1A;
+      --ink-light: #8A8580;
+      --accent: #C4553A;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: var(--paper);
+      color: var(--ink);
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 1rem;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+      position: relative;
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.035;
+      background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+
+    /* Header */
+    .site-header {
+      background: var(--ink);
+      padding: 0.75rem 2rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .site-header a {
+      color: #F2F0ED;
+      text-decoration: none;
+      font-family: 'Playfair Display', serif;
+      font-weight: 900;
+      font-size: 1.1rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    .site-header .tagline {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--ink-light);
+      letter-spacing: 0.05em;
+    }
+
+    /* Layout */
+    .page-wrap {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 4rem 2rem 6rem;
+    }
+
+    /* Title section */
+    .page-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--ink-light);
+      margin-bottom: 0.75rem;
+    }
+
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 900;
+      font-size: 2.4rem;
+      line-height: 1.15;
+      margin-bottom: 0.5rem;
+    }
+
+    .subtitle {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.8rem;
+      color: var(--ink-light);
+      margin-bottom: 3rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid rgba(0,0,0,0.1);
+    }
+
+    /* Steps */
+    .step {
+      display: grid;
+      grid-template-columns: 2.5rem 1fr;
+      gap: 0 1.5rem;
+      padding: 2rem 0;
+      border-bottom: 1px solid rgba(0,0,0,0.07);
+      align-items: start;
+    }
+
+    .step:last-of-type {
+      border-bottom: none;
+    }
+
+    .step-number {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      font-weight: 900;
+      color: var(--accent);
+      line-height: 1;
+      padding-top: 0.15rem;
+    }
+
+    .step-body h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      line-height: 1.25;
+    }
+
+    .step-body p {
+      font-size: 0.95rem;
+      color: #3A3A3A;
+      margin-bottom: 0.75rem;
+    }
+
+    .step-body a {
+      color: var(--accent);
+      text-decoration: underline;
+      font-weight: 600;
+    }
+
+    .step-body a:hover {
+      opacity: 0.75;
+    }
+
+    /* Screenshots */
+    .screenshot {
+      margin-top: 1.25rem;
+      width: 100%;
+      border: 1px solid rgba(0,0,0,0.1);
+      display: block;
+    }
+
+    .screenshot-caption {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--ink-light);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-top: 0.4rem;
+    }
+
+    /* Note box */
+    .note {
+      margin-top: 3rem;
+      padding: 1.5rem 1.75rem;
+      background: var(--ink);
+      color: var(--paper);
+    }
+
+    .note-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+
+    .note p {
+      font-size: 0.9rem;
+      line-height: 1.65;
+      color: rgba(242, 240, 237, 0.85);
+    }
+
+    .note strong {
+      color: var(--paper);
+    }
+
+    /* Back button */
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 3rem;
+      padding: 0.85rem 2rem;
+      background: var(--ink);
+      color: var(--paper);
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: background 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+
+    .back-btn:hover {
+      background: var(--accent);
+    }
+
+    @media (max-width: 600px) {
+      .page-wrap {
+        padding: 2rem 1.25rem 4rem;
+      }
+
+      h1 {
+        font-size: 1.8rem;
+      }
+
+      .step {
+        grid-template-columns: 2rem 1fr;
+        gap: 0 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <a href="javascript:history.back()">PYGRIND</a>
+    <span class="tagline">| train like an engineer</span>
+  </header>
+
+  <div class="page-wrap">
+
+    <p class="page-label">Setup Guide</p>
+    <h1>How to Get a Groq API Key</h1>
+    <p class="subtitle">Free tier — no credit card required &nbsp;·&nbsp; Takes less than 2 minutes</p>
+
+    <!-- Step 1 -->
+    <div class="step">
+      <div class="step-number">1</div>
+      <div class="step-body">
+        <h2>Go to the Groq Console</h2>
+        <p>
+          Open your browser and navigate to
+          <a href="https://console.groq.com/" target="_blank" rel="noopener noreferrer">console.groq.com</a>.
+          This is Groq's official developer dashboard — no payment info needed to sign up.
+        </p>
+      </div>
+    </div>
+
+    <!-- Step 2 -->
+    <div class="step">
+      <div class="step-number">2</div>
+      <div class="step-body">
+        <h2>Create an Account</h2>
+        <p>
+          Sign up using your Google account, GitHub account, or any email address.
+          Groq's free tier gives you immediate access to fast inference on models like
+          <strong>Llama 3</strong> and <strong>Mixtral</strong> — no waiting list.
+        </p>
+      </div>
+    </div>
+
+    <!-- Step 3 -->
+    <div class="step">
+      <div class="step-number">3</div>
+      <div class="step-body">
+        <h2>Open API Keys</h2>
+        <p>
+          Once you're in the dashboard, look for <strong>"API Keys"</strong> in the top-right navigation menu.
+          Click it to open the key management page.
+        </p>
+        <img
+          src="dashboard.png"
+          alt="Groq dashboard showing the API Keys menu in the top-right corner"
+          class="screenshot"
+        />
+        <p class="screenshot-caption">↑ API Keys option in the top-right corner of the dashboard</p>
+      </div>
+    </div>
+
+    <!-- Step 4 -->
+    <div class="step">
+      <div class="step-number">4</div>
+      <div class="step-body">
+        <h2>Generate a New Key</h2>
+        <p>
+          Click the <strong>"Generate Key"</strong> button. A dialog will appear asking you to configure your new key.
+        </p>
+        <img
+          src="generate.png"
+          alt="Groq API Keys page with the Generate Key button highlighted"
+          class="screenshot"
+        />
+        <p class="screenshot-caption">↑ Click "Generate Key" to create a new API key</p>
+      </div>
+    </div>
+
+    <!-- Step 5 -->
+    <div class="step">
+      <div class="step-number">5</div>
+      <div class="step-body">
+        <h2>Name Your Key & Set Expiration</h2>
+        <p>
+          Enter a name for the key — anything works, e.g. <em>"pygrind"</em>. Set the expiration date
+          to your preference (or leave it at the default). Then click <strong>Submit</strong>.
+        </p>
+        <img
+          src="submit.png"
+          alt="API key creation form showing name input and expiration selector"
+          class="screenshot"
+        />
+        <p class="screenshot-caption">↑ Fill in the name and expiration, then press Submit</p>
+      </div>
+    </div>
+
+    <!-- Step 6 -->
+    <div class="step">
+      <div class="step-number">6</div>
+      <div class="step-body">
+        <h2>Copy Your Key — One Time Only</h2>
+        <p>
+          Groq will display your API key <strong>exactly once</strong>. Copy it immediately and save it
+          somewhere secure (e.g. a password manager or a local notes file). Once you close the dialog,
+          the key cannot be retrieved again — you would need to generate a new one.
+        </p>
+        <p>
+          Once copied, paste it into the PyGrind setup field. That's it — you're ready to start drilling.
+        </p>
+      </div>
+    </div>
+
+    <!-- Security note -->
+    <div class="note">
+      <p class="note-label">Security Notice</p>
+      <p>
+        <strong>PyGrind never stores your API key on any server.</strong>
+        Your key is saved exclusively in your browser's local storage and is sent
+        directly from your device to Groq's servers. PyGrind has no backend, no database,
+        and no proxy — it is impossible for us to see or log your key.
+        We recommend creating a dedicated key for PyGrind so you can revoke it independently
+        if needed.
+      </p>
+    </div>
+
+    <a class="back-btn" href="javascript:history.back()">
+      ← Back to Setup
+    </a>
+
+  </div>
+
+</body>
+</html>

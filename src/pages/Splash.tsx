@@ -23,11 +23,11 @@ export function Splash() {
 
   return (
     <div
-      className="flex h-screen w-screen flex-col items-center justify-center bg-paper text-ink transition-opacity duration-500"
+      className="flex h-screen w-screen flex-col items-center justify-center bg-ink text-paper transition-opacity duration-500"
       style={{ opacity }}
     >
-      <img src={logoUrl} alt="PyGrind Logo" className="mb-6 h-24 w-24 object-contain" />
-      <h1 className="font-playfair text-4xl font-black uppercase tracking-widest text-ink">
+      <img src={logoUrl} alt="PyGrind Logo" className="mb-6 h-24 w-24 object-contain invert" />
+      <h1 className="font-playfair text-4xl font-black uppercase tracking-widest text-paper">
         PYGRIND
       </h1>
       <p className="mt-4 font-mono-dm text-sm font-light tracking-wide text-ink-light">

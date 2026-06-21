@@ -5,7 +5,6 @@ import { ArrowLeft, ArrowRight, Loader2 } from 'lucide-react'
 import { callLLM } from '../lib/llm'
 import { getCurrentProblem, isTierComplete, isUnlocked } from '../lib/progress'
 import { useAppStore } from '../store/appStore'
-import { HandbookViewer } from './HandbookViewer'
 
 const REVIEW_SYSTEM_PROMPT =
   "You are a code reviewer for a learning platform. Be direct. Point out what's wrong first, then what's right. End your response with exactly PASS or NEEDS_WORK on the last line."
@@ -102,7 +101,7 @@ export function ProblemEditor() {
   return (
     <div className="flex h-screen max-h-[calc(100vh-120px)] w-full flex-col lg:flex-row border-t border-ink-light/20">
       {/* Left Panel: Editor & Prompt */}
-      <div className="flex w-full flex-col overflow-y-auto lg:w-1/2">
+      <div className="flex w-full flex-col overflow-y-auto lg:w-2/3">
         <div className="flex flex-col gap-6 px-6 py-8">
           <div className="flex items-center justify-between">
             <Link
@@ -133,7 +132,7 @@ export function ProblemEditor() {
           </div>
           <div className="flex-1">
             <Editor
-              height="400px"
+              height="100%"
               language={language}
               onChange={(value) => setCode(value ?? '')}
               options={{
@@ -149,8 +148,22 @@ export function ProblemEditor() {
             />
           </div>
         </div>
+      </div>
 
-        <div className="flex flex-col gap-4 px-6 py-6">
+      {/* Right Panel: AI Review */}
+      <div className="flex h-full w-full flex-col border-l border-ink-light/20 bg-paper lg:w-1/3 overflow-y-auto px-6 py-8">
+        <div className="flex items-center justify-between mb-8">
+          <span className="font-playfair text-xl font-bold">AI Review</span>
+          <Link
+            to={`/handbook/${path.handbookPage}`}
+            target="_blank"
+            className="btn-primary px-4 py-2"
+          >
+            Handbook →
+          </Link>
+        </div>
+
+        <div className="flex flex-col gap-4">
           <button
             className="btn-primary w-full py-4 font-mono-dm text-sm uppercase tracking-widest disabled:cursor-not-allowed disabled:opacity-50 flex justify-center items-center gap-2"
             disabled={!canSubmit || isReviewing}
@@ -174,7 +187,7 @@ export function ProblemEditor() {
           {feedback ? (
             <div className="mt-4 flex flex-col gap-3 border-t border-ink-light/20 pt-4">
               <span className="font-mono-dm text-xs uppercase tracking-widest text-ink-light">AI Feedback</span>
-              <pre className="whitespace-pre-wrap font-mono-dm text-sm leading-relaxed text-ink/80">
+              <pre className="whitespace-pre-wrap font-sans text-sm leading-relaxed text-ink/80">
                 {feedback}
               </pre>
               <div className={`mt-2 font-mono-dm text-sm font-bold uppercase tracking-widest ${isPass ? 'text-green-600' : 'text-accent'}`}>
@@ -202,11 +215,6 @@ export function ProblemEditor() {
             </div>
           )}
         </div>
-      </div>
-
-      {/* Right Panel: Handbook */}
-      <div className="flex h-full w-full flex-col border-l border-ink-light/20 bg-ink lg:w-1/2 overflow-y-auto">
-        <HandbookViewer slug={path.handbookPage} />
       </div>
     </div>
   )

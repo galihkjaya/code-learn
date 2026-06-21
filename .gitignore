@@ -12,3 +12,13 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
+
+# Private tutorial assets — do not publish to GitHub
+*.pdf
+HOW TO GET GROQ CONSOLE API.pdf
+src/lib/dashboard.png
+src/lib/generate.png
+src/lib/submit.png
+public/dashboard.png
+public/generate.png
+public/submit.png

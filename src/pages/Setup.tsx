@@ -130,7 +130,12 @@ export function Setup() {
             
             <form onSubmit={handleSave} className="flex flex-col gap-8">
               <div className="flex flex-col gap-2">
-                <label className="font-mono-dm text-xs uppercase tracking-wider text-ink-light">API Key</label>
+                <div className="flex items-center justify-between">
+                  <label className="font-mono-dm text-xs uppercase tracking-wider text-ink-light">API Key</label>
+                  <a href="/how-to-get-groq-api.html" target="_blank" rel="noreferrer" className="font-mono-dm text-xs text-accent hover:underline">
+                    How to get a Groq key?
+                  </a>
+                </div>
                 <div className="relative">
                   <input
                     className="input-base w-full py-2 font-mono-dm placeholder:text-ink-light/50"
