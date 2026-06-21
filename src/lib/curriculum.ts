@@ -18,7 +18,7 @@ export type Curriculum = {
   paths: CurriculumPath[]
 }
 
-const CURRICULUM_STORAGE_KEY = 'codelearn.curriculum'
+const CURRICULUM_STORAGE_KEY = 'pygrind.curriculum'
 
 export function readCurriculum(): Curriculum | null {
   if (typeof window === 'undefined') {

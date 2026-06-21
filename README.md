@@ -6,7 +6,7 @@ A client-side coding learning platform for AI/ML and backend engineers. No serve
 
 <div align="center">
 
-## **CodeLearn**
+## **PyGrind**
 
 **A browser-only coding learning platform for AI/ML and backend engineers.**
 
@@ -33,7 +33,7 @@ npm run build
 - ✅ **AI code review**: Reviews end with `PASS` or `NEEDS_WORK` to unlock progress.
 - 📚 **Handbook side panel**: Pair every problem with owner-maintained HTML notes.
 
-> **Security:** Your API key never leaves your browser. CodeLearn sends requests directly from the client to Groq or Gemini and has no backend, proxy, database, or server-side key handling.
+> **Security:** Your API key never leaves your browser. PyGrind sends requests directly from the client to Groq or Gemini and has no backend, proxy, database, or server-side key handling.
 
 **Handbook list:** [Browse handbook pages](./handbook)
 

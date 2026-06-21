@@ -5,7 +5,7 @@ import { detectProvider, providerLabel } from '../lib/detectProvider'
 import { fetchGroqModels, GEMINI_MODELS } from '../lib/llm'
 import { type ApiStorageMode, useAppStore } from '../store/appStore'
 
-const REPO_URL = 'https://github.com/galihkjaya/code-learn.git'
+const REPO_URL = 'https://github.com/galihkjaya/pygrind.git'
 
 export function Setup() {
   const navigate = useNavigate()

@@ -35,7 +35,7 @@ function MainLayout() {
       <footer className="border-t border-ink-light/20 px-4 py-4 sm:px-6 lg:px-8">
         <div className="mx-auto flex max-w-7xl items-center justify-between font-mono-dm text-[0.6rem] uppercase text-ink-light">
           <span>© PyGrind</span>
-          <a href="https://github.com/galihkjaya/code-learn.git" target="_blank" rel="noreferrer" className="transition-colors hover:text-ink">GitHub →</a>
+          <a href="https://github.com/galihkjaya/pygrind.git" target="_blank" rel="noreferrer" className="transition-colors hover:text-ink">GitHub →</a>
         </div>
       </footer>
     </div>

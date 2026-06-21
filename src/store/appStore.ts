@@ -39,7 +39,7 @@ type AppState = {
   resetProgress: () => void
 }
 
-const API_CONFIG_STORAGE_KEY = 'codelearn.apiConfig'
+const API_CONFIG_STORAGE_KEY = 'pygrind.apiConfig'
 
 const savedApiConfig = readApiConfig()
 

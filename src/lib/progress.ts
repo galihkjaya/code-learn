@@ -2,7 +2,7 @@ import type { CurriculumPath, ProblemTier } from './curriculum'
 
 export type ProgressMap = Record<string, ProblemTier[]>
 
-const PROGRESS_STORAGE_KEY = 'codelearn.progress'
+const PROGRESS_STORAGE_KEY = 'pygrind.progress'
 
 export function readProgress(): ProgressMap {
   if (typeof window === 'undefined') {
