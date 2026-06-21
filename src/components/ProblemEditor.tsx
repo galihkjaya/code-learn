@@ -82,7 +82,6 @@ export function ProblemEditor() {
       setFeedback(review)
 
       if (review.endsWith('PASS')) {
-        completeTier(path.id, problem.tier)
         setPassedTier(true)
       }
     } catch (caughtError) {
@@ -187,9 +186,10 @@ export function ProblemEditor() {
           {feedback ? (
             <div className="mt-4 flex flex-col gap-3 border-t border-ink-light/20 pt-4">
               <span className="font-mono-dm text-xs uppercase tracking-widest text-ink-light">AI Feedback</span>
-              <pre className="whitespace-pre-wrap font-sans text-sm leading-relaxed text-ink/80">
-                {feedback}
-              </pre>
+              <div 
+                className="whitespace-pre-wrap font-sans text-sm leading-relaxed text-ink/80"
+                dangerouslySetInnerHTML={{ __html: formatFeedback(feedback) }}
+              />
               <div className={`mt-2 font-mono-dm text-sm font-bold uppercase tracking-widest ${isPass ? 'text-green-600' : 'text-accent'}`}>
                 {isPass ? 'PASS' : 'NEEDS_WORK'}
               </div>
@@ -202,6 +202,7 @@ export function ProblemEditor() {
               <button
                 className="btn-primary w-full py-4 font-mono-dm text-sm uppercase tracking-widest flex justify-center items-center gap-2"
                 onClick={() => {
+                  completeTier(path.id, problem.tier)
                   setPassedTier(false)
                   setFeedback('')
                   setCode(getStarterCode(language))
@@ -227,3 +228,20 @@ function getStarterCode(language: 'python' | 'sql') {
   return '# Write your Python solution here\n'
 }
 
+function formatFeedback(text: string) {
+  let html = text
+
+  // 1. Bold: **text**
+  html = html.replace(/\*\*(.*?)\*\*/g, '<strong class="font-bold text-ink">$1</strong>')
+  
+  // 2. Inline code: `code`
+  html = html.replace(/`(.*?)`/g, '<code class="bg-ink-light/20 text-accent px-1.5 py-0.5 rounded font-mono-dm text-xs">$1</code>')
+  
+  // 3. Code blocks: ```python ... ```
+  html = html.replace(/```[a-z]*\n([\s\S]*?)```/g, '<pre class="bg-ink p-3 my-2 rounded text-paper text-xs overflow-x-auto font-mono-dm"><code>$1</code></pre>')
+  
+  // 4. Strip the trailing PASS/NEEDS_WORK since it's displayed in the badge
+  html = html.replace(/\s*(PASS|NEEDS_WORK)\s*$/, '').trim()
+
+  return html
+}

@@ -50,7 +50,8 @@ Open [http://localhost:5173](http://localhost:5173) and paste your Groq or Gemin
 - ✅ **AI code review** — Reviews end with `PASS` or `NEEDS_WORK` to gatekeep progression.
 - 📚 **Handbook side panel** — Every problem is paired with owner-maintained HTML reference notes.
 
-> **Security:** Your API key never leaves your browser. PyGrind sends requests directly from the client to Groq or Gemini. No backend. No database. No proxy. [Audit the source →](https://github.com/galihkjaya/pygrind)
+> **Security & Data Disclaimer:** Your API key never leaves your browser. PyGrind sends requests directly from the client to Groq or Gemini. No backend. No database. No proxy. 
+> **Important:** Because there is no database, **your entire progress and curriculum are saved locally in your browser's `localStorage`**. If you clear your browser data, use incognito mode, or switch to a different device, your progress will not be saved. [Audit the source →](https://github.com/galihkjaya/pygrind)
 
 ---
 
