@@ -10,7 +10,8 @@ A browser-only coding practice platform for AI/ML and backend engineers. No serv
 
 **Train like an engineer.**
 
-![GitHub Pages](https://img.shields.io/badge/demo-GitHub%20Pages-2ea44f?style=for-the-badge&logo=githubpages)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/e85f76bc-6dc5-4923-863a-bbce54b5df1d/deploy-status)](https://pygrind.netlify.app/)
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-pygrind.netlify.app-00C7B7?style=for-the-badge&logo=netlify)](https://pygrind.netlify.app/)
 ![React](https://img.shields.io/badge/React-18-149eca?style=for-the-badge&logo=react)
 ![TypeScript](https://img.shields.io/badge/TypeScript-ready-3178c6?style=for-the-badge&logo=typescript)
 ![No Backend](https://img.shields.io/badge/no%20backend-browser%20only-0f766e?style=for-the-badge)
