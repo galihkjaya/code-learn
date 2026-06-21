@@ -3,12 +3,20 @@ export default {
   content: ['./index.html', './src/**/*.{ts,tsx}'],
   theme: {
     extend: {
-      fontFamily: {
-        sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
-        mono: ['"JetBrains Mono"', 'ui-monospace', 'SFMono-Regular', 'monospace'],
+      colors: {
+        paper: 'var(--paper)',
+        ink: 'var(--ink)',
+        'ink-light': 'var(--ink-light)',
+        accent: 'var(--accent)',
       },
-      boxShadow: {
-        panel: '0 18px 60px rgba(15, 23, 42, 0.08)',
+      fontFamily: {
+        sans: ['"Instrument Sans"', 'sans-serif'],
+        serif: ['"Playfair Display"', 'serif'],
+        mono: ['"DM Mono"', 'monospace'],
+      },
+      transitionTimingFunction: {
+        DEFAULT: 'cubic-bezier(0.23, 1, 0.32, 1)',
+        'in-out-custom': 'cubic-bezier(0.23, 1, 0.32, 1)',
       },
     },
   },
