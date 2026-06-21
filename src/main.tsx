@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { BrowserRouter, NavLink, Route, Routes, Outlet, useLocation } from 'react-router-dom'
 import { BookOpen, GraduationCap, Home as HomeIcon } from 'lucide-react'
-import { ApiKeySetup } from './components/ApiKeySetup'
+import { Setup } from './pages/Setup'
 import { Home } from './pages/Home'
 import { Learn } from './pages/Learn'
 import { Handbook } from './pages/Handbook'
@@ -48,7 +48,7 @@ function App() {
       <Routes>
         {/* We will route / to Splash, and Setup / Brief next. */}
         <Route element={<Splash />} path="/" />
-        <Route element={<PageTransition><ApiKeySetup /></PageTransition>} path="/setup" />
+        <Route element={<PageTransition><Setup /></PageTransition>} path="/setup" />
         <Route element={<PageTransition><Home /></PageTransition>} path="/brief" />
         
         <Route element={<MainLayout />}>
