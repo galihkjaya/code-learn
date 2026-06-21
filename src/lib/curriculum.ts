@@ -1,4 +1,4 @@
-export type ProblemTier = 1 | 2 | 3
+export type ProblemTier = number
 
 export type Problem = {
   tier: ProblemTier
@@ -136,7 +136,7 @@ function normalizeProblem(value: unknown): Problem | null {
 }
 
 function isProblemTier(value: number): value is ProblemTier {
-  return value === 1 || value === 2 || value === 3
+  return Number.isInteger(value) && value >= 1
 }
 
 function asNonEmptyString(value: unknown): string | null {

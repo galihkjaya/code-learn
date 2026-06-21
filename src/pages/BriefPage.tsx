@@ -187,7 +187,8 @@ The JSON must match this exact schema:
       "problems": [
         { "tier": 1, "title": "...", "prompt": "..." },
         { "tier": 2, "title": "...", "prompt": "..." },
-        { "tier": 3, "title": "...", "prompt": "..." }
+        { "tier": 3, "title": "...", "prompt": "..." },
+        { "tier": 4, "title": "...", "prompt": "..." }
       ]
     }
   ]
@@ -196,7 +197,7 @@ The JSON must match this exact schema:
 CRITICAL RULES FOR DYNAMIC GENERATION:
 1. NO HARDCODED REPETITION: You MUST NOT return the same generic examples every time. You MUST dynamically select topics that perfectly match the user's chosen "Goals" and "Current level".
 2. PATHS COUNT: Create exactly 5 to 7 paths based on the learner brief.
-3. PROBLEMS: Every path must have exactly three problems, with tiers 1, 2, and 3. Tier 1 is warm-up, Tier 2 is applied, Tier 3 is complex.
+3. ADAPTIVE TIERS: Every path must have an adaptive number of problems (tiers), ranging from 3 to 8+. Assign more problems to complex or broad paths, and fewer to simpler paths. Always start at tier 1 and increment sequentially (e.g. tier 1, tier 2, tier 3, tier 4...). Tier 1 is warm-up, middle tiers are applied, final tiers are complex.
 4. HANDBOOK SELECTION: You MUST pick a "handbookPage" that exists from this exact list of available files:
 [ ${fileList} ]
 Do not invent filenames that are not in this list. Match the handbook page to the path's topic.
