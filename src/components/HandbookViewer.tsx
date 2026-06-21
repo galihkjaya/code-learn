@@ -11,6 +11,8 @@ type HandbookState =
   | { status: 'missing' }
   | { status: 'error'; message: string }
 
+const handbookFiles = import.meta.glob('../../handbook/*.html', { query: '?raw', import: 'default' })
+
 export function HandbookViewer({ slug }: HandbookViewerProps) {
   const [state, setState] = useState<HandbookState>({ status: 'idle' })
   const normalizedSlug = useMemo(() => normalizeSlug(slug), [slug])
@@ -21,38 +23,34 @@ export function HandbookViewer({ slug }: HandbookViewerProps) {
       return
     }
 
-    const controller = new AbortController()
-    const baseUrl = import.meta.env.BASE_URL.endsWith('/')
-      ? import.meta.env.BASE_URL
-      : `${import.meta.env.BASE_URL}/`
+    const loadContent = async () => {
+      setState({ status: 'loading' })
+      const path = `../../handbook/${normalizedSlug}`
+      
+      if (!handbookFiles[path]) {
+        setState({ status: 'missing' })
+        return
+      }
 
-    setState({ status: 'loading' })
+      try {
+        const rawHtml = await handbookFiles[path]() as string
+        const parser = new DOMParser()
+        const doc = parser.parseFromString(rawHtml, 'text/html')
+        
+        // Extract only the main content, ignoring the sidebar and original <style>
+        const mainDiv = doc.querySelector('.main')
+        const htmlToRender = mainDiv ? mainDiv.innerHTML : rawHtml
 
-    fetch(`${baseUrl}handbook/${normalizedSlug}`, { signal: controller.signal })
-      .then(async (response) => {
-        if (response.status === 404) {
-          setState({ status: 'missing' })
-          return
-        }
-
-        if (!response.ok) {
-          throw new Error(`Unable to load handbook page (${response.status})`)
-        }
-
-        setState({ status: 'ready', html: await response.text() })
-      })
-      .catch((error: unknown) => {
-        if (controller.signal.aborted) {
-          return
-        }
-
+        setState({ status: 'ready', html: htmlToRender })
+      } catch (error) {
         setState({
           status: 'error',
           message: error instanceof Error ? error.message : 'Unable to load handbook page.',
         })
-      })
+      }
+    }
 
-    return () => controller.abort()
+    loadContent()
   }, [normalizedSlug])
 
   return (

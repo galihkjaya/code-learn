@@ -150,6 +150,80 @@
     text-decoration: underline;
   }
 
+  .handbook-content .subtitle {
+    color: var(--ink-light);
+    font-size: 1rem;
+    margin-bottom: 2rem;
+  }
+  
+  .handbook-content .tier-badge {
+    display: inline-block;
+    background: var(--ink);
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    font-size: 0.7rem;
+    padding: 2px 10px;
+    margin-bottom: 2rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  
+  .handbook-content .concept-box,
+  .handbook-content .callout,
+  .handbook-content .quiz {
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.1);
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+  }
+
+  .handbook-content .callout {
+    border-left: 4px solid var(--accent);
+  }
+
+  .handbook-content .section-nav {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+  }
+
+  .handbook-content .section-nav a {
+    color: var(--ink-light);
+    border: 1px solid rgba(255,255,255,0.1);
+    padding: 4px 12px;
+    font-size: 0.8rem;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .handbook-content .section-nav a:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+  }
+
+  .handbook-content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+    font-size: 0.9rem;
+  }
+
+  .handbook-content th {
+    background: rgba(255,255,255,0.02);
+    color: var(--paper);
+    text-align: left;
+    padding: 10px 14px;
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .handbook-content td {
+    padding: 10px 14px;
+    border: 1px solid rgba(255,255,255,0.1);
+    color: var(--ink-light);
+  }
+
   /* Nav link hover fill from left */
   .nav-link-ink {
     position: relative;
